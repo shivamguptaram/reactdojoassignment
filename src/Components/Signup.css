@@ -8343,4 +8343,6 @@
           border: 1px solid transparent;
           background: #e3b04b;
           color: #fff; }
-  
+  .passwordnotmatch{
+    color:red
+  }

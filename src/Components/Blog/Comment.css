@@ -37,3 +37,21 @@ i.fa.fa-angle-up {
     font-size: 25pt;
     vertical-align: middle;
 }
+.addcomment {
+  display: grid;
+  grid-template-columns: 85% auto;
+  column-gap: 5%;
+}
+button.postcomment {
+  border-radius: 1em;
+}
+
+input.newcommentinput{
+  border-radius:1em;
+}
+.col-md-12 {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  padding-bottom: 2%;
+  padding-top:2%;
+  margin-bottom: 5%;
+}

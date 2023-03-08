@@ -39,3 +39,12 @@
   .card-footer:last-child {
     border-radius: 0 0 0.8rem 0.8rem;
   }
+  button.btn-Logout {
+    padding: 0px 10px 0px 10px;
+    margin: auto;
+    border-radius: 10px;
+}
+.heading {
+  display: grid;
+  grid-template-columns: 90% auto;
+}

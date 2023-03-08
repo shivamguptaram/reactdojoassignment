@@ -21,8 +21,11 @@ const Comment = ({ title, content,postid,addcomment }) => {
         </div>
         </div>
        
-      )} <input type="text" value={newcomment} onChange={(e)=>setnewcomment(e.target.value)}/>
-      <button onClick={()=>addcomment(newcomment,postid)}>Comment</button>
+      )} 
+      <div className='addcomment'>
+      <input type="text" className='newcommentinput'placeholder='Enter your comment' value={newcomment} onChange={(e)=>setnewcomment(e.target.value)}/>
+      <button className='postcomment' onClick={()=>{addcomment(newcomment,postid);setnewcomment('')}}>Comment</button>
+      </div>
       </div>}
     
     </div>

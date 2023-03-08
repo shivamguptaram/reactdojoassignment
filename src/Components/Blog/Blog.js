@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Blog.css'
 import Comment from './Comment';
@@ -8,6 +9,7 @@ const Blog = () => {
   const [title, settitle] = useState('');
   const [body, setbody] = useState('');
   const [comment, setcomment] = useState([])
+  const navigate=useNavigate();
   const loggedInUser=useSelector((state)=>{
 		console.log("registered user",state.loginReducer);
 		return state.loginReducer.LoggedinUser.username
@@ -39,9 +41,14 @@ const Blog = () => {
       "body": body
     }
     setpost(prev=>[blogdata,...prev]);
+    settitle('');
+    setbody('');
+  }
+  let handleLogout=()=>{
+    navigate('/Login');
   }
   let addComment=(newcomment,postid)=>{
-    
+
     let comment={
       "postId": postid,
       "id": 4,
@@ -50,11 +57,16 @@ const Blog = () => {
       "body": newcomment
     }
     setcomment(prev=>[...prev,comment]);
+    // setnewcomment()
     console.log("comments",comment);
     }
   return (
     <div>
+      <div className='heading'>
       <h1 className="main-heading"> Welcome To Cuelogic Blog {loggedInUser} </h1>
+      <button className='btn-Logout' onClick={handleLogout}>Logout</button>
+      </div>
+      {/* <div><button>Create</button></div> */}
     <div class="container">
   <div class="row">
     <div class="col-md-12">
