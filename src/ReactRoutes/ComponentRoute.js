@@ -5,10 +5,15 @@ import Login from '../Components/Login';
 import Signup from '../Components/Signup';
 import { useSelector } from 'react-redux';
 const ComponentRoute = () => {
-  const loggedInUser=useSelector((state)=>{
-		console.log("registered user",state.loginReducer);
+
+  var loggedInUser=useSelector((state)=>{
+		// console.log("registered user",state.loginReducer);
 		return state.loginReducer.LoggedinUser.username
 	});
+  if(!loggedInUser){
+    loggedInUser=window.localStorage.getItem('Login');
+    // console.log("inside route",loggedInUser)
+  }
   return (
     <Routes>
         <Route path="/" element={<Login />} />

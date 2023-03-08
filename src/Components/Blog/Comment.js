@@ -13,8 +13,8 @@ const Comment = ({ title, content,postid,addcomment }) => {
         <div>{isActive ? <span>Hide Comment <i className="fa fa-angle-up" ></i></span> : <span>View Comment <i className="fa fa-angle-down" ></i></span> }</div>
       </div>
       {isActive && <div className="accordion-content">{content.map((comment)=>
-      <div class="cardflex">
-        <div class="flexcontainer">
+      <div className="cardflex">
+        <div className="flexcontainer">
             <div className='email'><b>{comment.email}</b></div>
 
             <div>{comment.body}</div>

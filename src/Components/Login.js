@@ -21,7 +21,7 @@ const Login = (props) => {
 		{
 			// console.log("i m here")
 			props.logginUser({username:username})
-			// window.localStorage.setItem('Login',JSON.stringify({username:username}));
+			window.localStorage.setItem('Login',JSON.stringify({username:username}));
 			navigate('/blog');
 		}
 		else {

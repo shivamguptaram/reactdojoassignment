@@ -8,26 +8,52 @@ const Blog = () => {
   const [post, setpost] = useState([]);
   const [title, settitle] = useState('');
   const [body, setbody] = useState('');
-  const [comment, setcomment] = useState([])
+  const [comment, setcomment] = useState([]);
+  const [userPost, setuserPost] = useState([]);
+  const [userComment, setuserComment] = useState([]);
+
   const navigate=useNavigate();
-  const loggedInUser=useSelector((state)=>{
-		console.log("registered user",state.loginReducer);
+  var loggedInUser=useSelector((state)=>{
+		// console.log("registered user",state.loginReducer);
 		return state.loginReducer.LoggedinUser.username
 	});
+  // const loginuser=window.localStorage.getItem('Login');
+  // if(LoggedinUser)
+  if(!loggedInUser){
+    loggedInUser=JSON.parse(window.localStorage.getItem('Login')).username;
+    // console.log("inside route",loggedInUser)
+  }
 
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/posts')
     .then((result)=>{
-      console.log(result);
+      // console.log(result);
       setpost(result.data);
+      const userpost =JSON.parse(window.localStorage.getItem('userpost'));
+      // console.log('userpost get',userpost);
+      if(userpost){
+          setuserPost(prev=>[...userpost,...prev]);
+          setpost(prev=>[...userpost,...prev]);
+        }
+        // setpost(prev=>[userPost,...prev]);
     })
     axios.get('https://jsonplaceholder.typicode.com/posts/1/comments')
     .then((result)=>{
-      console.log(result);
+      // console.log(result);
       setcomment(result.data);
     })
+    // const userpost =JSON.parse(window.localStorage.getItem('userpost'));
+    // const usercomment= JSON.parse(window.localStorage.getItem('usercomment'));
+    // console.log("userpost",userpost);
+    // if(userpost){
+    //   setuserPost(prev=>[...userpost,...prev]);
+    // }
+    // if(usercomment){
+    //   setcomment(prev=>[...usercomment,...prev]);
+    // }
     return () => {
       // second
+      window.localStorage.clear();
     }
   },[]);
 
@@ -40,9 +66,18 @@ const Blog = () => {
       "title": title,
       "body": body
     }
-    setpost(prev=>[blogdata,...prev]);
+    setuserPost(prev=>{window.localStorage.setItem('userpost',JSON.stringify([blogdata,...prev]))
+
+     return [blogdata,...prev]
+    });
+    setpost(prev=>{
+      return [blogdata,...prev]}
+      );
     settitle('');
     setbody('');
+    // console.log("userpost added",userPost);
+
+    window.localStorage.setItem('userpost',JSON.stringify(userPost));
   }
   let handleLogout=()=>{
     navigate('/Login');
@@ -56,29 +91,32 @@ const Blog = () => {
       "email": loggedInUser?loggedInUser:'DefualtUser',
       "body": newcomment
     }
+    // setuserComment(prev1=>[...prev1,comment]);
+    // window.localStorage.setItem('usercomment',JSON.stringify(userComment));
     setcomment(prev=>[...prev,comment]);
     // setnewcomment()
-    console.log("comments",comment);
+    // console.log("comments",comment);
     }
   return (
     <div>
+      {/* {JSON.stringify(userPost)} */}
       <div className='heading'>
       <h1 className="main-heading"> Welcome To Cuelogic Blog {loggedInUser} </h1>
       <button className='btn-Logout' onClick={handleLogout}>Logout</button>
       </div>
       {/* <div><button>Create</button></div> */}
-    <div class="container">
-  <div class="row">
-    <div class="col-md-12">
+    <div className="container">
+  <div className="row">
+    <div className="col-md-12">
       <form>
-        <div class="form-group">
-          <input type="text" class="form-control" name="title" placeholder="Title" value={title} onChange={((e)=>settitle(e.target.value))}/>
+        <div className="form-group">
+          <input type="text" className="form-control" name="title" placeholder="Title" value={title} onChange={((e)=>settitle(e.target.value))}/>
         </div>
-        <div class="form-group">
-          <textarea class="form-control bcontent" name="content" value={body} placeholder="Add blog description" onChange={((e)=>setbody(e.target.value))}></textarea>
+        <div className="form-group">
+          <textarea className="form-control bcontent" name="content" value={body} placeholder="Add blog description" onChange={((e)=>setbody(e.target.value))}></textarea>
         </div>
-        <div class="form-group">
-           <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" onClick={handlePost} />
+        <div className="form-group">
+           <input type="submit" name="Submit" value="Publish" className="btn btn-primary form-control" onClick={handlePost} />
         </div>
       </form>
     </div>
@@ -99,12 +137,12 @@ const Blog = () => {
       <button type='submit' className='btn-post' onClick={handlePost}>Post</button>
     </form> */}
 
-     <div class="card border-0">
+     <div className="card border-0">
       {
-      post.map((e)=><div class="card-body" key={e.id}>
-          <h4 class="card-title">{e.title}</h4>
+      post.map((e)=><div className="card-body" key={e.id}>
+          <h4 className="card-title">{e.title}</h4>
           <hr/>
-          <p class="card-text">{e.body}</p>
+          <p className="card-text">{e.body}</p>
           
           <Comment title='' postid={e.id} addcomment={addComment} content={comment.filter((e1)=>e1.postId===e.id)}/>
 
