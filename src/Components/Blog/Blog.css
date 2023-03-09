@@ -54,7 +54,9 @@
 i#closeBlog {
   float: right;
   padding-bottom: 1%;
+  cursor: pointer;
 }
 button.createBlog {
   border-radius: 10px;
+
 }
