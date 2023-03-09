@@ -1,10 +1,7 @@
 import { REGISTER_USER } from "./registerTypes"
 const initialState={
     registeredUser:[
-            {
-            username:'shivam',
-            password:'shivam'
-            }
+
         ]
     }
 const registerReducer=(state=initialState,action)=>{

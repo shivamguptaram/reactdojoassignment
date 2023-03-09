@@ -1,7 +1,7 @@
 import React,{useState,} from 'react'
 import {connect,useSelector} from 'react-redux'
 import { Link,useNavigate } from 'react-router-dom'
-import { registerUser } from '../Redux'
+import { registerUser } from '../../Redux'
 import './Signup.css'
 
 const Signup = (props) => {

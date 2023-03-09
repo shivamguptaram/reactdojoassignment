@@ -1,8 +1,8 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom';
 import Blog from '../Components/Blog/Blog';
-import Login from '../Components/Login';
-import Signup from '../Components/Signup';
+import Login from '../Components/Login/Login';
+import Signup from '../Components/Signup/Signup';
 import { useSelector } from 'react-redux';
 const ComponentRoute = () => {
 

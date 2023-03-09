@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import './Login.css';
 import {useSelector,connect} from 'react-redux';
 import { useNavigate,Link} from 'react-router-dom';
-import {loginUser} from '../Redux/login/loginActions'
+import {loginUser} from '../../Redux/login/loginActions'
 const Login = (props) => {
 	const [username, setusername] = useState('');
 	const [password, setpassword] = useState('');

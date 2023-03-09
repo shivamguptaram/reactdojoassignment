@@ -48,3 +48,13 @@
   display: grid;
   grid-template-columns: 90% auto;
 }
+.row{
+  place-content: center;
+}
+i#closeBlog {
+  float: right;
+  padding-bottom: 1%;
+}
+button.createBlog {
+  border-radius: 10px;
+}

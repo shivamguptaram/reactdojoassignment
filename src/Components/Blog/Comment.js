@@ -3,9 +3,7 @@ import './Comment.css'
 const Comment = ({ title, content,postid,addcomment }) => {
   const [isActive, setIsActive] = useState(false);
   const [newcomment, setnewcomment] = useState('');
-// let handleComment=()=>{
 
-//     }
   return (
     <div className="accordion-item">
       <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
@@ -13,7 +11,7 @@ const Comment = ({ title, content,postid,addcomment }) => {
         <div>{isActive ? <span>Hide Comment <i className="fa fa-angle-up" ></i></span> : <span>View Comment <i className="fa fa-angle-down" ></i></span> }</div>
       </div>
       {isActive && <div className="accordion-content">{content.map((comment)=>
-      <div className="cardflex">
+      <div className="cardflex" key={comment.id}>
         <div className="flexcontainer">
             <div className='email'><b>{comment.email}</b></div>
 

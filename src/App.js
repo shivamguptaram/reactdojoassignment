@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import Login from './Components/Login';
+import Login from './Components/Login/Login';
 import ComponentRoute from './ReactRoutes/ComponentRoute';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
