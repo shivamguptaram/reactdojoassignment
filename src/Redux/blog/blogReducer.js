@@ -6,7 +6,8 @@ const initialState={
 const blogReducer=(state=initialState,action)=>{
     switch(action.type){
         case ADD_BLOG:
-            state.blog=[...action.payload]    
+            // state.blog=[...action.payload]    
+            state.blog=[...state.blog,...action.payload]    
         return {
             ...state
         }
@@ -16,7 +17,7 @@ const blogReducer=(state=initialState,action)=>{
             ...state
         }
         case ADD_COMMENT:
-            state.comment=[...action.payload]    
+            state.comment=[...action.payload,...state.comment]    
         return {
             ...state
         }

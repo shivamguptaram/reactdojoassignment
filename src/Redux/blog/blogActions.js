@@ -1,8 +1,30 @@
+
 import { ADD_BLOG,ADD_USER_BLOG,ADD_USER_COMMENT,ADD_COMMENT } from "./blogTypes"
+import axios from 'axios';
 export const addBlog=(blog)=>{
     return {
         type:ADD_BLOG,
         payload:blog
+    }
+}
+export const addBlogApi=()=>{
+    return function(dispatch)
+    {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then((result)=>{
+             dispatch(addBlog(result.data));
+             console.log("inside addblogapi",result.data)
+            })
+    }
+}
+export const addCommentApi=()=>{
+    return function(dispatch)
+    {
+        axios.get('https://jsonplaceholder.typicode.com/posts/1/comments')
+            .then((result)=>{
+             dispatch(addComment(result.data));
+            //  console.log("inside addblogapi",result.data)
+            })
     }
 }
 export const addUserBlog=(blog)=>{

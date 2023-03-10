@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import { connect, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addBlog,addComment,addUserBlog, addUserComment } from '../../Redux/blog/blogActions';
-import axios from 'axios';
+import { addBlog,addComment,addUserBlog, addUserComment,addBlogApi, addCommentApi } from '../../Redux/blog/blogActions';
+// import axios from 'axios';
 import './Blog.css'
 import Comment from './Comment';
 const Blog = (props) => {
@@ -25,26 +25,39 @@ const Blog = (props) => {
   }
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then((result)=>{
-      props.addblog(result.data);
+    // axios.get('https://jsonplaceholder.typicode.com/posts')
+    // .then((result)=>{
+    //   props.addblog(result.data);
       
+    //   const userpost =JSON.parse(window.localStorage.getItem('userpost'));
+    //   if(userpost){
+    //       props.addblog([...userpost,...result.data]);
+    //       setuserPost(userpost)
+
+    //     }
+    // }).catch((error)=>console.log(error))
+    props.addBlogApi();
+    console.log("props in  blog",props.blog);
       const userpost =JSON.parse(window.localStorage.getItem('userpost'));
       if(userpost){
-          props.addblog([...userpost,...result.data]);
+          props.addblog([...userpost]);
           setuserPost(userpost)
-
         }
-    }).catch((error)=>console.log(error))
-    axios.get('https://jsonplaceholder.typicode.com/posts/1/comments')
-    .then((result)=>{
-      props.addcomment(result.data);
-      const usercomment =JSON.parse(window.localStorage.getItem('usercomment'));
+    // axios.get('https://jsonplaceholder.typicode.com/posts/1/comments')
+    // .then((result)=>{
+    //   props.addcomment(result.data);
+    //   const usercomment =JSON.parse(window.localStorage.getItem('usercomment'));
+    //   if(usercomment){
+    //     props.addcomment([...result.data,...usercomment]);
+    //     setuserComment(usercomment);
+    //   }
+    // })
+    props.addCommentApi();
+       const usercomment =JSON.parse(window.localStorage.getItem('usercomment'));
       if(usercomment){
-        props.addcomment([...result.data,...usercomment]);
+        props.addcomment([...usercomment]);
         setuserComment(usercomment);
       }
-    })
     
     return () => {
       // second
@@ -145,7 +158,9 @@ const mapStateToProps = state=>{
 	  addblog: (data)=>dispatch(addBlog(data)),
     addUserBlog: (data)=>dispatch(addUserBlog(data)),
     addcomment:(data)=>dispatch(addComment(data)),
-    addusercomment:(data)=>dispatch(addUserComment(data))
+    addusercomment:(data)=>dispatch(addUserComment(data)),
+    addBlogApi:()=>dispatch(addBlogApi()),
+    addCommentApi:()=>dispatch(addCommentApi())
 	}
   }
 export default connect(mapStateToProps,mapDispatchToProps)(Blog);
